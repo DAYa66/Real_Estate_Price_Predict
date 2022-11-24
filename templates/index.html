@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html >
+
+<style>
+    form {
+        margin: auto;
+        width: 35%;
+    }
+
+    .result {
+        margin: auto;
+        width: 35%;
+        border: 1px solid #ccc;
+    }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Real estate price prediction</title>
+
+  <!-- Quick Start: CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+ <div class="login" align="center">
+  <h2>Real Estate Price Prediction</h2>
+    <p>Introduce DistrictId, the number of rooms, Square, LifeSquare, KitchenSquare, Floor,
+        HouseFloor, HouseYear, Ecology_1, Ecology_2, Ecology_3, Social_1, Social_2, Social_3,
+        Healthcare_1, Healthcare_2, Shops_1, Shops_2:</p>
+     <!-- Inputs for our ML models -->
+      <form action="{{ url_for('predict')}}" method="post">
+        <input name="DistrictId" type="number" placeholder="DistrictId" required="required" />
+          <br>
+          <input name="Rooms" type="number" placeholder="Rooms" required="required" />
+          <br>
+        <input name="Square" type="number" step=0.000001 placeholder="Square" required="required"/>
+          <br>
+          <input name="LifeSquare" type="number" step=0.000001 placeholder="LifeSquare" required="required" />
+          <br>
+        <input name="KitchenSquare" type="number" step=0.1 placeholder="KitchenSquare" required="required"/>
+          <br>
+          <input name="Floor" type="number" placeholder="Floor" required="required" />
+          <br>
+        <input name="HouseFloor" type="number"  step=0.1 placeholder="HouseFloor" required="required"/>
+          <br>
+          <input name="HouseYear" type="number" placeholder="HouseYear" required="required" />
+          <br>
+        <input name="Ecology_1" type="number" step=0.000001 placeholder="Ecology_1" required="required"/>
+          <br>
+          <label for="Ecology_2">Ecology_2</label>
+          <select id="Ecology_2" name="Ecology_2">
+              <option value="A">A</option>
+              <option value="B">B</option>
+          </select>
+          <br>
+        <label for="Ecology_3">Ecology_3</label>
+          <select id="Ecology_3" name="Ecology_3">
+              <option value="A">A</option>
+              <option value="B">B</option>
+          </select>
+          <br>
+          <input name="Social_1" type="number" placeholder="Social_1" required="required" />
+          <br>
+        <input name="Social_2" type="number" placeholder="Social_2" required="required"/>
+          <br>
+          <input name="Social_3" type="number" placeholder="Social_3" required="required"/>
+          <br>
+          <input name="Healthcare_1" type="number" step=0.1 placeholder="Healthcare_1" required="required"/>
+          <br>
+          <input name="Helthcare_2" type="number"  placeholder="Helthcare_2" required="required"/>
+          <br>
+          <input name="Shops_1" type="number" placeholder="Shops_1" required="required"/>
+          <br>
+          <label for="Shops_2">Shops_2</label>
+          <select id="Shops_2" name="Shops_2">
+              <option value="A">A</option>
+              <option value="B">B</option>
+          </select>
+
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary btn-block btn-large">Predict Value!</button>
+      </form>
+ </div>
+    <br>
+    <br>
+<div class="result" align="center">
+    {% if result %}
+        <br>
+        <p style="font-size: 50px">
+        Prediction:
+        </p>
+        <p style="font-size: 50px">{{result}}</p>
+    {% endif %}
+</div>
+
+</body>
+
+</html>
