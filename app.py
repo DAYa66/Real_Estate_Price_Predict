@@ -6,22 +6,33 @@ import pickle
 from DataPreprocessing import DataPreprocessing
 from FeatureGenetator import FeatureGenetator
 from My_pca import My_pca
-
 import logging
 from logging.handlers import RotatingFileHandler
 from time import strftime
+import sys
+import pathlib
 
-X_TRAIN_DATASET_PATH = 'data/X_concat.csv'
-Y_TRAIN_DATASET_PATH = 'data/y_concat.csv'
-BEST_MODEL_PATH = 'models/catb_model.pkl'
+cwd = pathlib.Path().cwd()
+sys.path.append(cwd.as_posix())
+data_folder = cwd.joinpath('data')
+model_folder = cwd.joinpath('models')
 
 app = Flask(__name__)
-#best_model = pickle.load(open(BEST_MODEL_PATH, 'rb'))
+best_model = None
 
 handler = RotatingFileHandler(filename='app.log', maxBytes=100000, backupCount=10)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 logger.addHandler(handler)
+
+def load_model(model_path):
+		# load the pre-trained model
+		global best_model
+		with open(model_path, 'rb') as f:
+			best_model = pickle.load(f)
+		print(best_model)
+
+load_model(model_folder.joinpath('catb_model.pkl'))
 
 @app.route('/')
 def home():
@@ -54,8 +65,8 @@ def predict():
         return render_template('index.html',
                                result=f'Mistake: ${result}')
 
-    X_train = pd.read_csv(X_TRAIN_DATASET_PATH)
-    y_train = pd.read_csv(Y_TRAIN_DATASET_PATH)
+    X_train = pd.read_csv(data_folder.joinpath('X_concat.csv'))
+    y_train = pd.read_csv(data_folder.joinpath('y_concat.csv'))
 
     preprocessor = DataPreprocessing()
     preprocessor.fit(X_train)
@@ -89,15 +100,12 @@ def predict():
     X_train = step_2.fit_transform(X_train)
     to_predict_df = step_2.transform(to_predict_df)
 
-    with open(BEST_MODEL_PATH, 'rb') as model:
-        best_model = pickle.load(model)
-
     try:
         result = best_model.predict(to_predict_df)
         result = round(result[0], 2)
     except AttributeError as e:
         logger.warning(f'{dt} Exception: {str(e)}')
-        result = list(str(e))
+        result = str(e)
         return render_template('index.html',
                                result=f'Mistake: ${result}')
 
