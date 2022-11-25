@@ -48,7 +48,7 @@ class DataPreprocessing:
               , 'Social_1', 'Social_2', 'Social_3', 'Helthcare_2', 'Shops_1']][X.Healthcare_1_nan == 0]
         w = X['Healthcare_1'][X.Healthcare_1_nan == 0]
         Z_train, Z_test, w_train, w_test = train_test_split(Z, w, shuffle=True, test_size=0.25)
-        self.final_model = GradientBoostingRegressor(criterion='mse',
+        self.final_model = GradientBoostingRegressor(criterion='squared_error',
                                                 max_depth=7,
                                                 min_samples_leaf=3,
                                                 random_state=42,
