@@ -50,6 +50,9 @@ def predict():
               'Helthcare_2', 'Shops_1']
     to_float = ['Rooms', 'Square', 'LifeSquare', 'KitchenSquare', 'Floor', 'HouseFloor', 'Ecology_1',
                 'Healthcare_1']
+
+    #TO DO: make logger of features
+
     try:
         to_predict_df[to_num] = to_predict_df[to_num].astype("int8")
     except ValueError as e:
