@@ -112,7 +112,10 @@ def predict():
         return render_template('index.html',
                                result=f'Mistake: ${result}')
 
-    return render_template('index.html', result=f'A house with your parameters has a value of ${result}')
+    return render_template('index.html',
+                result=f'A house with your parameters has a value of ${result}')
 
 if __name__ == "__main__":
-    app.run()
+    print(("* Loading the model and Flask starting server..."
+           "please wait until server has fully started"))
+    app.run(debug=True)
