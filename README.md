@@ -1,5 +1,16 @@
 # Real_Estate_Price_Predict
-# Предсказание цен московской недвижимости
+
+Предсказание цен московской недвижимости
+
+Стек:
+
+ML: sklearn, pandas, numpy, scipy, catboost, xgboost, lightgbm, hyperopt, tensorflow,
+
+tensorflow-addons, keras
+
+API: Flask
+
+Здравствуйте!
 
 Знакомство с проектом прошу начинать с Presentation.pdf
 
@@ -12,9 +23,8 @@
 
 В папке /data содержатся все .csv-файлы с данными
 
-Файл app.py используется для генерации предсказания с помощью Flask
+Файл app.py используется для генерации предсказания.
 Этот файл использует классы, прописанные в файлах DataPreprocessing.py, 
 FeatureGenetator.py и My_pca.py.
 
-Файл app.log сгенерирован библиотекой logging.
 
