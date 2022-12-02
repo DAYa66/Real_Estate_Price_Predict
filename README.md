@@ -28,3 +28,4 @@ API: Flask
 FeatureGenetator.py и My_pca.py.
 
 
+
