@@ -2,6 +2,8 @@
 
 Предсказание цен московской недвижимости
 
+Добился самой высокой целевой метрики в этом соревновании.
+
 Стек:
 
 ML: sklearn, pandas, numpy, scipy, catboost, xgboost, lightgbm, hyperopt, tensorflow,
